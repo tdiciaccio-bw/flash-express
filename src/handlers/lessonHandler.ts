@@ -4,13 +4,16 @@ import Card from '../models/card';
 import { DataValidationError } from '../utils/errors';
 
 export async function handleLesson(scoredCardArray: ScoredResponse[]) {
-  scoredCardArray.forEach(response => {
-    const { card, score } = response;
-    card.correctStreak = _calculateCorrectStreak(card.correctStreak, score);
-    card.easiness = _calculateNewEasiness(card.easiness, score);
-    card.nextDueDate = _calculateNextReviewDate(card);
-    updateCard(card);
-  });
+  await Promise.all(
+    scoredCardArray.map(async (response) => {
+      const { card, score } = response;
+      card.correctStreak = _calculateCorrectStreak(card.correctStreak, score);
+      card.easiness = _calculateNewEasiness(card.easiness, score);
+      card.nextDueDate = _calculateNextReviewDate(card);
+      console.log(card);
+      await updateCard(card);
+    })
+  );
 }
 
 function _calculateNewEasiness(easiness: number, score: number) : number {
