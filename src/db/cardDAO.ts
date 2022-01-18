@@ -42,5 +42,4 @@ export async function updateCard(card: Card) {
   } catch (e) {
     console.log(e);
   }
-  return null;
 }
