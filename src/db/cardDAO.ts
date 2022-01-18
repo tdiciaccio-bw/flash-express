@@ -1,6 +1,7 @@
 import knex from 'knex';
 import { config } from './config';
 import Card from '../models/card';
+import { Card as DBCard } from '../models/cardDatabase';
 
 export async function getAllCards() {
   const knexInstance = knex(config);
@@ -28,6 +29,17 @@ export async function getLesson(deckId: number, size: number) {
 }
 
 export async function updateCard(card: Card) {
-  console.log(`Updating card: ${card}`);
-  return null;
+  const knexInstance = knex(config);
+
+  try {
+    await knexInstance<DBCard>('card')
+      .where('id', card.id)
+      .update({
+        correct_streak: card.correctStreak,
+        easiness: card.easiness,
+        next_due_date: card.nextDueDate
+      });
+  } catch (e) {
+    console.log(e);
+  }
 }
