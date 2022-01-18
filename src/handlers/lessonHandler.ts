@@ -10,7 +10,6 @@ export async function handleLesson(scoredCardArray: ScoredResponse[]) {
       card.correctStreak = _calculateCorrectStreak(card.correctStreak, score);
       card.easiness = _calculateNewEasiness(card.easiness, score);
       card.nextDueDate = _calculateNextReviewDate(card);
-      console.log(card);
       await updateCard(card);
     })
   );
