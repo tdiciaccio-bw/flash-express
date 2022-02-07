@@ -13,7 +13,7 @@
     "init-claudia": "npm run build && npm run copy-package && claudia generate-serverless-express-proxy --source build --express-module index",
     "copy-package": "cp package.json ./build/package.json && cp claudia.json ./build/claudia.json && cp lambda.js ./build/lambda.js",
     "create-api": "claudia create --handler lambda.handler --deploy-proxy-api --region us-east-1 --source build",
-    "update-api": "npm run build && npm run copy-package && claudia update --source build"
+    "update-api": "npm run build && npm run copy-package && claudia update --source build --use-s3-bucket flash-express --no-optional-dependencies"
   },
   "dependencies": {
     "@okta/jwt-verifier": "^2.3.0",
