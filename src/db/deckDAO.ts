@@ -12,3 +12,12 @@ export async function getDecksByUserId(id: number) {
     console.log(e);
   }
 }
+
+export async function createDeck(deck: Deck) {
+  const knexInstance = knex(config);
+  try {
+    await knexInstance<Deck>('deck').insert(deck);
+  } catch (e) {
+    console.log(e);
+  }
+}

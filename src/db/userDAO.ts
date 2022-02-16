@@ -12,3 +12,14 @@ export async function getUsers() {
     console.log('Error: ' + e);
   }
 }
+
+export async function getUserByEmail(email: string) {
+  const knexInstance = knex(knexConfig);
+
+  try {
+    const user = await knexInstance<User>('user').select().where('email', email).first();
+    return user;
+  } catch (e) {
+    console.log(e);
+  }
+}

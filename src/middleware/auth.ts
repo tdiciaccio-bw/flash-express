@@ -42,6 +42,7 @@ export default async (req: Request, res: Response, next: NextFunction) => {
       return res.status(403).json({ 'error': e.message });
     } else {
       console.log('Another unexpected error happened: ' + e);
+      res.sendStatus(500);
     }
   }
 };

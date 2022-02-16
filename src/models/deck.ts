@@ -1,6 +1,7 @@
 export default interface Deck {
-	id: number;
+	id?: number;
 	name: string;
-	userId: number;
+	userId?: number;
+	user_id?: number;
 	description: string;
 }
